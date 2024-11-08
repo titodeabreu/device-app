@@ -20,8 +20,8 @@ public class DeviceControllerV1 {
     }
 
     @GetMapping
-    public List<Device> getAllDevices() {
-        return deviceService.getAllDevices();
+    public ResponseEntity<List<Device>> getAllDevices() {
+        return ResponseEntity.ok(deviceService.getAllDevices());
     }
 
     @GetMapping("/{id}")
@@ -31,7 +31,7 @@ public class DeviceControllerV1 {
     }
 
     @PostMapping
-    public Device createDevice(@RequestBody DeviceInputDTO deviceInputDTO) {
+    public ResponseEntity<Device> createDevice(@RequestBody DeviceInputDTO deviceInputDTO) {
 
         Device device = Device
                 .builder()
@@ -40,7 +40,7 @@ public class DeviceControllerV1 {
                 .creationTime(Instant.now())
                 .build();
 
-        return deviceService.save(device);
+        return ResponseEntity.ok(deviceService.save(device));
     }
 
     @DeleteMapping("/{id}")
@@ -49,6 +49,27 @@ public class DeviceControllerV1 {
         return ResponseEntity.noContent().build();
     }
 
-    // missing patch and put
+    @PutMapping("/{id}")
+    public ResponseEntity<Device> fullUpdateOnDevice(@PathVariable Long id, @RequestBody DeviceInputDTO deviceInputDTO) {
+        Device device = deviceService.getDeviceById(id);
+
+        device.setName(deviceInputDTO.getName());
+        device.setBrand(deviceInputDTO.getBrand());
+
+        return ResponseEntity.ok(deviceService.save(device));
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Device> partialUpdateOnDevice(@PathVariable Long id, @RequestBody DeviceInputDTO deviceInputDTO) {
+        Device device = deviceService.getDeviceById(id);
+
+        if (deviceInputDTO.getName() != null)
+            device.setName(deviceInputDTO.getName());
+
+        if (deviceInputDTO.getBrand() != null)
+            device.setBrand(deviceInputDTO.getBrand());
+
+        return ResponseEntity.ok(deviceService.save(device));
+    }
 
 }
