@@ -1,13 +1,17 @@
 package com.device.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 import java.time.Instant;
 import java.util.Objects;
 
 @Entity
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Device {
 
     @Id
@@ -20,7 +24,6 @@ public class Device {
 
     @Column(name = "creation_time")
     private Instant creationTime; // stored as UTC
-
 
     public Long getId() {
         return id;

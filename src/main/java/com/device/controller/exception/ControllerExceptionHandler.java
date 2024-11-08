@@ -1,4 +1,4 @@
-package com.device.controller.v1.exception;
+package com.device.controller.exception;
 
 import com.device.exception.DeviceNotFoundException;
 import org.springframework.http.HttpStatus;

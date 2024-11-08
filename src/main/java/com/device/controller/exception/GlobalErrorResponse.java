@@ -1,4 +1,4 @@
-package com.device.controller.v1.exception;
+package com.device.controller.exception;
 
 import lombok.Data;
 
