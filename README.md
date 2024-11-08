@@ -57,3 +57,9 @@ docker run --name device-management-app -p 8080:8080 device-management-image
 ```
 http://localhost:8080/swagger-ui/index.html#/
 ```
+
+## Postman Collection can be found at
+
+```
+resources/postman/Device Postman Collection.postman_collection.json
+```

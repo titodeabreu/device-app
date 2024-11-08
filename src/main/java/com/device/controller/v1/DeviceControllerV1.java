@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -25,9 +26,15 @@ public class DeviceControllerV1 {
     }
 
     @GetMapping
-    public ResponseEntity<List<DeviceResponseDTO>> getAllDevices() {
-        logger.info("GET [/api/v1/devices] get all devices");
-        List<Device> allDevices = deviceService.getAllDevices();
+    public ResponseEntity<List<DeviceResponseDTO>> getAllDevices(@RequestParam(required = false) String brand) {
+        logger.info("GET [/api/v1/devices] get all devices, queryParam brand={}", brand);
+        List<Device> allDevices = new ArrayList<>(0);
+
+        if (brand != null) {
+            allDevices = deviceService.getDeviceByBrand(brand);
+        } else {
+            allDevices = deviceService.getAllDevices();
+        }
 
         List<DeviceResponseDTO> allDevicesResponse = allDevices
                 .stream()
@@ -59,7 +66,7 @@ public class DeviceControllerV1 {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteDevice(@PathVariable Long id) {
         logger.info("DELETE [/api/v1/devices/{}] delete device by id", id);
         deviceService.delete(id);
         return ResponseEntity.noContent().build();

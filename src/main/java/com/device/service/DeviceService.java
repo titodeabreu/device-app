@@ -28,8 +28,8 @@ public class DeviceService {
         deviceRepository.deleteById(id);
     }
 
-    public Device getDeviceByBrand(String brand) {
-        Optional<Device> device = deviceRepository.findByBrand(brand);
+    public List<Device> getDeviceByBrand(String brand) {
+        Optional<List<Device>> device = deviceRepository.findByBrand(brand);
 
         if (device.isEmpty())
             throw new DeviceNotFoundException("No device found with brand=" + brand);
