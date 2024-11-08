@@ -1,11 +1,13 @@
 package com.device.model;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 
 import java.time.Instant;
 import java.util.Objects;
 
 @Entity
+@Builder
 public class Device {
 
     @Id
@@ -17,7 +19,8 @@ public class Device {
     private String brand;
 
     @Column(name = "creation_time")
-    private Instant creationTime;
+    private Instant creationTime; // stored as UTC
+
 
     public Long getId() {
         return id;

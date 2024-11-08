@@ -46,7 +46,7 @@ public class DeviceService {
         return device.get();
     }
 
-    public List<Device> listAllDevices() {
+    public List<Device> getAllDevices() {
         return deviceRepository.findAll();
     }
 
