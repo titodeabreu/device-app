@@ -1,21 +1,59 @@
-# Getting Started
+# Device Management App
 
-### Reference Documentation
-For further reference, please consider the following sections:
+## Overview
 
-* [Official Gradle documentation](https://docs.gradle.org)
-* [Spring Boot Gradle Plugin Reference Guide](https://docs.spring.io/spring-boot/3.3.5/gradle-plugin)
-* [Create an OCI image](https://docs.spring.io/spring-boot/3.3.5/gradle-plugin/packaging-oci-image.html)
-* [Spring Web](https://docs.spring.io/spring-boot/3.3.5/reference/web/servlet.html)
+The **Device Management App** is a spring boot application made on Java 21 that provides a RESTful API for managing devices. The application includes thw following endpoints:
 
-### Guides
-The following guides illustrate how to use some features concretely:
+1. **Create Device**: Allows users to create a new device.
+2. **Delete Device by ID**: Allows users to delete a device.
+3. **Get Device by ID**: Retrieves details about a specific device by device ID.
+4. **Get All Devices**: Retrieves details about all devices registered in db.
+5. **Patch Device**: Update partially all the fields available for a device
+6. **PUT Device**: Update all the fields available for a device
 
-* [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
-* [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
-* [Building REST services with Spring](https://spring.io/guides/tutorials/rest/)
+## Technologies Used
 
-### Additional Links
-These additional references should also help you:
+- Java 21
+- Spring boot 3.3.5
+- H2 in memory db
+- MapStruct
+- Lombok
+- Swagger
 
-* [Gradle Build Scans – insights for your project's build](https://scans.gradle.com#gradle)
+## Build and Run (Docker)
+
+### 1. Running with Docker
+
+```
+docker build -t device-management-image .
+```
+
+```
+docker run --name device-management-app -p 8080:8080 device-management-image
+```
+
+## Build and Run (Dev)
+
+### 1. Build Project
+
+```
+./gradlew clean build
+```
+
+### 2. Running unit tests
+
+```
+./gradlew test
+```
+
+### 3. Running in Development Mode
+
+```
+./gradlew bootRun
+```
+
+## Swagger UI
+
+```
+http://localhost:8080/swagger-ui/index.html#/
+```
